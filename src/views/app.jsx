@@ -10,6 +10,7 @@ import {reducer as formReducer} from 'redux-form';
 
 import Header from './header';
 import SignUp from './sign_up';
+import Login from './login';
 import Apply from './apply';
 import ApplyInfo from './apply_info';
 
@@ -40,9 +41,9 @@ const routes = (
   <Route component={AppHandler}>
     <Route path='/' component={Index}/>
     <Route path='/signup' component={SignUp}/>
+    <Route path='/login' component={Login}/>
     //<Route path='/apply_info' component={ApplyInfo}/>
     //<Route path='/apply' component={Apply}/>
-
     <Route path="*" component={_404}/>
   </Route>
 );

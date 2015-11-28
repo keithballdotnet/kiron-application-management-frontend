@@ -16,3 +16,7 @@ body {
 body * {
   font-family: 'Roboto', sans-serif, system;
 }
+
+.page {
+  padding: 1em;
+}
