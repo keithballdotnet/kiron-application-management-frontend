@@ -9,6 +9,8 @@ import * as formUtils from '../utils/forms';
 
 import countriesJson from '../constants/countries.json';
 
+const countriesOptions = countriesJson.map(({name, code}) => [code, name]);
+
 const FIELDS = [
   'firstName', 'lastName', 'email',
   'birthday', 'gender','nationality','phone','city',
@@ -51,27 +53,10 @@ const validate = function (values) {
 
 class _InfoForm extends React.Component {
 
-  constructor (props) {
-    super(props);
-    console.log(props);
-
-  }
-
-  static propTypes = {
-    handleSubmit: React.PropTypes.func.isRequired
-  }
-
   render () {
     const {fields: {
-      birthday,
-      gender,
-      nationality,
-      phone,
-      country,
-      city,
-      zip,
-      address,
-      address_extra,
+      birthday, gender, nationality, phone,
+      country, city, zip, address, address_extra,
     }, handleSubmit} = this.props;
 
     const baseClass = "block col-6 mb2 field";
@@ -81,25 +66,13 @@ class _InfoForm extends React.Component {
         <h2>Personal Information</h2>
         <label>Birthday{formUtils.ErrorSpan(birthday)}</label>
         <input className={baseClass + (formUtils.hasError(birthday) ? ' is-error' : '')} type="text" placeholder="YYYY-MM-DD" {...birthday}/>
-        <label>Gender</label>
-        <select required {...gender} className="block col-12 mb1 field">
-          <option key={GENDER.MALE} value={GENDER.MALE}>{GENDER.MALE}</option>
-          <option key={GENDER.FEMALE} value={GENDER.FEMALE}>{GENDER.FEMALE}</option>
-        </select>
+        {formUtils.Select(gender, baseClass, 'Gender', [[GENDER.MALE], [GENDER.FEMALE]])}
         <label>Nationality{formUtils.ErrorSpan(nationality)}</label>
         <input className={baseClass + (formUtils.hasError(nationality) ? ' is-error' : '')} type="text" placeholder="Nationality" {...nationality}/>
         <label>Phone{formUtils.ErrorSpan(phone)}</label>
         <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
-        <label>Address</label>
-        <br/>
-        <label>Country</label>
-        <select required {...country} className="block col-12 mb1 field">
-        {
-           countriesJson.map(({name, code}) => {
-            return <option key={code} value={code}>{name}</option>;
-          })
-           }
-        </select>
+        <h3>Address</h3>
+        {formUtils.Select(country, baseClass, 'Country', countriesOptions)}
         <label>City{formUtils.ErrorSpan(city)}</label>
         <input className={baseClass + (formUtils.hasError(city) ? ' is-error' : '')} type="text" placeholder="Munich" {...city}/>
         <label>ZIP{formUtils.ErrorSpan(zip)}</label>
@@ -132,10 +105,7 @@ export default class ApplyInfo extends React.Component {
     console.log(data);
   }
 
-
-
   render () {
-    console.log(this.submit);
     return (
       <div className="page container">
         <h1>Application Process</h1>

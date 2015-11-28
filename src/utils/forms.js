@@ -53,3 +53,17 @@ export function Radio (field, cls, obj, {label}) {
     </div>
   );
 }
+
+export function Select (field, cls, label, options) {
+  return (
+    <div>
+      <label>{label || ''}</label>
+      <select {...field} className={'field ' + cls}>
+      {options.map(([key, display]) => {
+        display = display || key;
+        return <option key={key} value={key}>{display}</option>;
+      })}
+      </select>
+    </div>
+  );
+}
