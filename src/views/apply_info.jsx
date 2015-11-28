@@ -10,7 +10,6 @@ import * as formUtils from '../utils/forms';
 import countriesJson from '../constants/countries.json';
 
 const FIELDS = [
-  'firstName', 'lastName', 'email',
   'birthday', 'gender','nationality','phone','city',
   'country', 'zip', 'address', 'address_extra'
 ];
@@ -29,19 +28,12 @@ function getAge(dateString) {
 const validate = function (values) {
   const errors = {};
 
-  formUtils.required(values, 'firstName', errors);
-  formUtils.required(values, 'lastName', errors);
-  formUtils.required(values, 'email', errors);
   formUtils.required(values, 'birthday', errors);
   formUtils.required(values, 'gender', errors);
   formUtils.required(values, 'city', errors);
   formUtils.required(values, 'country', errors);
   formUtils.required(values, 'zip', errors);
   formUtils.required(values, 'address', errors);
-
-  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address.';
-  }
 
   if (values.birthday && !/[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i.test(values.birthday)) {
     errors.birthday = 'Invalid date.';
@@ -74,8 +66,6 @@ class _InfoForm extends React.Component {
 
   render () {
     const {fields: {
-      firstName,
-      lastName,
       email,
       birthday,
       gender,
@@ -94,12 +84,6 @@ class _InfoForm extends React.Component {
     return (
       <form className="sm-col-6 mb3" onSubmit={handleSubmit}>
         <h2>Personal Information</h2>
-        <label>First Name {formUtils.errorSpan(firstName)}</label>
-        <input className={baseClass + (formUtils.hasError(firstName) ? ' is-error' : '')} type="text" placeholder="First Name" {...firstName}/>
-        <label>Last Name {formUtils.errorSpan(lastName)}</label>
-        <input className={baseClass + (formUtils.hasError(lastName) ? ' is-error' : '')} type="text" placeholder="Last Name" {...lastName}/>
-        <label>Email address {formUtils.errorSpan(email)}</label>
-        <input className={baseClass + (formUtils.hasError(email) ? ' is-error' : '')} type="email" placeholder="name@domain.com" {...email}/>
         <label>Phone{formUtils.errorSpan(phone)}</label>
         <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
         <label>Birthday{formUtils.errorSpan(birthday)}</label>
