@@ -7,11 +7,12 @@ import { USER_TYPES } from '../constants';
 import { GENDER } from '../constants';
 import * as formUtils from '../utils/forms';
 
-//import { countriesJson } from '../constants/countries.json';
+import countriesJson from '../constants/countries.json';
 
 const FIELDS = [
   'firstName', 'lastName', 'email',
-  'birthday', 'gender','nationality','phone'
+  'birthday', 'gender','nationality','phone','city',
+  'country', 'zip', 'address', 'address_extra'
 ];
 
 function getAge(dateString) {
@@ -33,6 +34,10 @@ const validate = function (values) {
   formUtils.required(values, 'email', errors);
   formUtils.required(values, 'birthday', errors);
   formUtils.required(values, 'gender', errors);
+  formUtils.required(values, 'city', errors);
+  formUtils.required(values, 'country', errors);
+  formUtils.required(values, 'zip', errors);
+  formUtils.required(values, 'address', errors);
 
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address.';
@@ -44,12 +49,15 @@ const validate = function (values) {
     errors.birthday = 'You are too young or too old!';
   }
 
+  if (values.phone && !/[0-9]+$/i.test(values.phone)) {
+    errors.phone = 'Pleas provide just numbers.';
+  }
 
   formUtils.required(values, 'userType', errors);
   return errors;
 }
 
-class _Form extends React.Component {
+class _InfoForm extends React.Component {
 
   constructor (props) {
     super(props);
@@ -63,7 +71,18 @@ class _Form extends React.Component {
 
   render () {
     const {fields: {
-      firstName, lastName, email, birthday, gender,nationality,phone
+      firstName,
+      lastName,
+      email,
+      birthday,
+      gender,
+      nationality,
+      phone,
+      country,
+      city,
+      zip,
+      address,
+      address_extra,
     }, handleSubmit} = this.props;
 
     const baseClass = "block col-6 mb2 field";
@@ -87,19 +106,39 @@ class _Form extends React.Component {
         </select>
         <label>Nationality{formUtils.errorSpan(nationality)}</label>
         <input className={baseClass + (formUtils.hasError(nationality) ? ' is-error' : '')} type="text" placeholder="Nationality" {...nationality}/>
-        <label>Phone</label>
-        <input required className="block col-12 mb1 field" type="tel" placeholder="XXXXXXXXXX" {...phone}/>
+        <label>Phone{formUtils.errorSpan(phone)}</label>
+        <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
+        <label>Address</label>
+        <br/>
+        <label>Country</label>
+        <select required {...country} className="block col-12 mb1 field">
+        {
+           countriesJson.map(({name, code}) => {
+            return <option key={code} value={code}>{name}</option>;
+          })
+           }
+        </select>
+        <label>City{formUtils.errorSpan(city)}</label>
+        <input className={baseClass + (formUtils.hasError(city) ? ' is-error' : '')} type="text" placeholder="Munich" {...city}/>
+        <label>ZIP{formUtils.errorSpan(zip)}</label>
+        <input className={baseClass + (formUtils.hasError(zip) ? ' is-error' : '')} type="text" placeholder="ZIP" {...zip}/>
+        <label>Street{formUtils.errorSpan(address)}</label>
+        <input className={baseClass + (formUtils.hasError(address) ? ' is-error' : '')} type="text" placeholder="55 Berlin St." {...address}/>
+        <label>Address extra{formUtils.errorSpan(zip)}</label>
+        <input className={baseClass + (formUtils.hasError(address_extra) ? ' is-error' : '')} type="text" placeholder="2nd floor" {...address_extra}/>
+        
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Next</button>
+      
       </form>
     );
   }
 }
 
-const Form = reduxForm({
+const InfoForm = reduxForm({
   form: 'synchronousValidation',
   fields: FIELDS,
   validate
-})(_Form);
+})(_InfoForm);
 
 export default class ApplyInfo extends React.Component {
 
@@ -117,8 +156,8 @@ export default class ApplyInfo extends React.Component {
     console.log(this.submit);
     return (
       <div className="page container">
-        <h1>Sign Up</h1>
-        <Form onSubmit={this.submit}/>
+        <h1>Application Process</h1>
+        <InfoForm onSubmit={this.submit}/>
       </div>
     )
   }
