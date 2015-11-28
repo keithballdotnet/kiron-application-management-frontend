@@ -10,8 +10,8 @@ import {reducer as formReducer} from 'redux-form';
 
 import Header from './header';
 import SignUp from './sign_up';
-// import Apply from './apply';
-// import ApplyInfo from './apply_info';
+import Apply from './apply';
+import ApplyInfo from './apply_info';
 
 const reducer = combineReducers({
   router: routerStateReducer,
@@ -40,6 +40,9 @@ const routes = (
   <Route component={AppHandler}>
     <Route path='/' component={Index}/>
     <Route path='/signup' component={SignUp}/>
+    //<Route path='/apply_info' component={ApplyInfo}/>
+    //<Route path='/apply' component={Apply}/>
+
     <Route path="*" component={_404}/>
   </Route>
 );

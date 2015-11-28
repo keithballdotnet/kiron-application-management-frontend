@@ -3,52 +3,75 @@
 import React from 'react';
 import {reduxForm} from 'redux-form';
 
-import { GENDER } from '../constants';
-import countriesJson from '../constants/countries';
+import { USER_TYPES } from '../constants';
 import * as formUtils from '../utils/forms';
 
-const _fields = [
-  "firstName", "lastName", "email",
-  "birthday", "gender", "nationality",
-  "phone",
-  // addressCountry, addressCity, addressStreet, addressZipCode, addressSpecial
+const FIELDS = [
+  'firstName', 'lastName', 'email',
+  'birthday', 
 ];
 
-const validate = (values) => {
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
+
+const validate = function (values) {
   const errors = {};
-  _required(values, 'firstName', errors);
-  _required(values, 'lastName', errors);
-  _required(values, 'email' errors);
-  _required(values, 'birthday' errors);
-  _required(values, 'gender' errors);
-  _required(values, 'nationality' errors);
+
+  formUtils.required(values, 'firstName', errors);
+  formUtils.required(values, 'lastName', errors);
+  formUtils.required(values, 'email', errors);
+
+  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address.';
+  }
+
+  if (values.birthday && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.birthday = 'Birthday.';
+  }
+
+  formUtils.required(values, 'userType', errors);
+  return errors;
 }
 
 class _Form extends React.Component {
 
+  constructor (props) {
+    super(props);
+    console.log(props);
+
+  }
+
   static propTypes = {
-    fields: React.PropTypes.object.isRequired,
     handleSubmit: React.PropTypes.func.isRequired
   }
 
   render () {
     const {fields: {
-      firstName, lastName, email,
-      birthday, gender, nationality,
-      phone,
-      // addressCountry, addressCity, addressStreet, addressZipCode, addressSpecial
+      firstName, lastName, email, password, passwordConfirm, userType
     }, handleSubmit} = this.props;
+
+    const baseClass = "block col-6 mb2 field";
+    console.log(handleSubmit);
+
     return (
       <form className="sm-col-6" onSubmit={handleSubmit}>
         <h2>Personal Information</h2>
-        <label>First Name</label>
-        <input required className="block col-12 mb1 field" type="text" placeholder="First Name" {...firstName}/>
-        <label>Last Name</label>
-        <input required className="block col-12 mb1 field" type="text" placeholder="Last Name" {...lastName}/>
-        <label>Email address</label>
-        <input required className="block col-12 mb1 field" type="email" placeholder="name@domain.com" {...email}/>
-        <label>Birthday</label>
-        <input required className="block col-12 mb1 field" type="text" placeholder="DD/MM/YYYY" {...birthday}/>
+        <label>First Name {formUtils.errorSpan(firstName)}</label>
+        <input className={baseClass + (formUtils.hasError(firstName) ? ' is-error' : '')} type="text" placeholder="First Name" {...firstName}/>
+        <label>Last Name {formUtils.errorSpan(lastName)}</label>
+        <input className={baseClass + (formUtils.hasError(lastName) ? ' is-error' : '')} type="text" placeholder="Last Name" {...lastName}/>
+        <label>Email address {formUtils.errorSpan(email)}</label>
+        <input className={baseClass + (formUtils.hasError(email) ? ' is-error' : '')} type="email" placeholder="name@domain.com" {...email}/>
+        <label>Birthday{formUtils.errorSpan(birthday)}</label>
+        <input className={baseClass + (formUtils.hasError(birthday) ? ' is-error' : '')} type="text" placeholder="YYYY-MM-DD" {...birthday}/>
         <label>Gender</label>
         <select required {...gender} className="block col-12 mb1 field">
           <option key={GENDER.MALE} value={GENDER.MALE}>{GENDER.MALE}</option>
@@ -70,14 +93,31 @@ class _Form extends React.Component {
   }
 }
 
-const Form = reduxForm({form: 'simple', fields: _fields})(_Form);
+const Form = reduxForm({
+  form: 'synchronousValidation',
+  fields: FIELDS,
+  validate
+})(_Form);
 
-export default class ApplyInfo extends React.Component {
+export default class SignUp extends React.Component {
+
   constructor (props) {
     super(props);
   }
 
+  submit = (data) => {
+    console.log(data);
+  }
+
+
+
   render () {
-    return <Form/>
+    console.log(this.submit);
+    return (
+      <div className="page container">
+        <h1>Sign Up</h1>
+        <Form onSubmit={this.submit}/>
+      </div>
+    )
   }
 }
