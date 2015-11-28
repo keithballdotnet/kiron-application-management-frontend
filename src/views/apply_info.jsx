@@ -124,7 +124,7 @@ class _InfoForm extends React.Component {
         <input className={baseClass + (formUtils.hasError(zip) ? ' is-error' : '')} type="text" placeholder="ZIP" {...zip}/>
         <label>Street{formUtils.errorSpan(address)}</label>
         <input className={baseClass + (formUtils.hasError(address) ? ' is-error' : '')} type="text" placeholder="55 Berlin St." {...address}/>
-        <label>Address extra{formUtils.errorSpan(zip)}</label>
+        <label>Address extra{formUtils.errorSpan(address_extra)}</label>
         <input className={baseClass + (formUtils.hasError(address_extra) ? ' is-error' : '')} type="text" placeholder="2nd floor" {...address_extra}/>
         
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Next</button>
