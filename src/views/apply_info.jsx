@@ -39,14 +39,13 @@ const validate = function (values) {
   if (values.birthday && !/[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i.test(values.birthday)) {
     errors.birthday = 'Invalid date.';
   }else if (getAge(values.birthday)<5 || getAge(values.birthday)>150 ) {
-    errors.birthday = 'You are too young or too old!';
+    errors.birthday = 'You are too young or too old';
   }
 
-  if (values.phone && !/[0-9]+$/i.test(values.phone)) {
-    errors.phone = 'Pleas provide just numbers.';
+  if (values.phone && !/[0-9]{5,20}$/i.test(values.phone)) {
+    errors.phone = 'Pleas provide just numbers';
   }
 
-  formUtils.required(values, 'userType', errors);
   return errors;
 }
 
@@ -76,7 +75,6 @@ class _InfoForm extends React.Component {
     }, handleSubmit} = this.props;
 
     const baseClass = "block col-6 mb2 field";
-    console.log(handleSubmit);
 
     return (
       <form className="sm-col-6" onSubmit={handleSubmit}>
