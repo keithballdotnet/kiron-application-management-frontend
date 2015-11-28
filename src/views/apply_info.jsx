@@ -52,6 +52,9 @@ const validate = function (values) {
   if (values.phone && !/[0-9]+$/i.test(values.phone)) {
     errors.phone = 'Pleas provide just numbers.';
   }
+  if (values.zip && !/[0-9]+$/i.test(values.zip)) {
+    errors.zip = 'Pleas provide a proper ZIP.';
+  }
 
   formUtils.required(values, 'userType', errors);
   return errors;
