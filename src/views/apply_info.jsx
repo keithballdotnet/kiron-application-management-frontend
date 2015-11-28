@@ -100,6 +100,8 @@ class _InfoForm extends React.Component {
         <input className={baseClass + (formUtils.hasError(lastName) ? ' is-error' : '')} type="text" placeholder="Last Name" {...lastName}/>
         <label>Email address {formUtils.errorSpan(email)}</label>
         <input className={baseClass + (formUtils.hasError(email) ? ' is-error' : '')} type="email" placeholder="name@domain.com" {...email}/>
+        <label>Phone{formUtils.errorSpan(phone)}</label>
+        <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
         <label>Birthday{formUtils.errorSpan(birthday)}</label>
         <input className={baseClass + (formUtils.hasError(birthday) ? ' is-error' : '')} type="text" placeholder="YYYY-MM-DD" {...birthday}/>
         <label>Gender</label>
@@ -109,9 +111,8 @@ class _InfoForm extends React.Component {
         </select>
         <label>Nationality{formUtils.errorSpan(nationality)}</label>
         <input className={baseClass + (formUtils.hasError(nationality) ? ' is-error' : '')} type="text" placeholder="Nationality" {...nationality}/>
-        <label>Phone{formUtils.errorSpan(phone)}</label>
-        <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
-        <label>Address</label>
+         <hr />
+        <h3>Address</h3>
         <br/>
         <label>Country</label>
         <select required {...country} className="block col-12 mb1 field">
