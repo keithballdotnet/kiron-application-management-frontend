@@ -71,10 +71,14 @@ export default class ApplyDocuments extends React.Component {
   render () {
     console.log(this.submit);
     return (
+      <div className="center px3 py4 white bg-gray bg-cover bg-center niceimage">
       <div className="page container">
-        <h1>Document upload</h1>
-        <DocumentsForm onSubmit={this.submit}/>
-      </div>
+        
+          <h1>Document upload</h1>
+          <DocumentsForm onSubmit={this.submit}/>
+        </div>
+        </div>
+
     )
   }
 }

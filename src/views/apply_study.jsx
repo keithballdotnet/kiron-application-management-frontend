@@ -18,7 +18,6 @@ const previouseducationoptions = previouseducationJSON.map(({name, id}) => [id, 
 
 const validate = function (values) {
   const errors = {};
-  formUtils.required(values, 'studyprogram', errors);
   formUtils.required(values, 'previouseducation', errors);
   return errors;
 }
