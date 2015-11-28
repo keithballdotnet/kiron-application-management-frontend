@@ -7,7 +7,7 @@ import { USER_TYPES } from '../constants';
 import * as formUtils from '../utils/forms';
 
 const FIELDS = [
-  'avatar', 'passport'
+  'documents'
 ];
 
 const validate = function (values) {
@@ -30,7 +30,7 @@ class _DocumentsForm extends React.Component {
 
   render () {
     const {fields: {
-      avatar
+      documents
     }, handleSubmit} = this.props;
 
     const baseClass = "block col-6 mb2 field";
@@ -39,16 +39,14 @@ class _DocumentsForm extends React.Component {
     return (
       <form className="sm-col-6" onSubmit={handleSubmit}>
       <div>
-          <label>Avatar</label>
+          <label>Document to state refugee status</label>
           <div>
-            <input type="file" {...avatar} value={ null } />
+            <input type="file" {...documents} value={ null } />
           </div>
         </div>
         <div>
-          <button onClick={handleSubmit}>Submit</button>
+          <button className="block mb2 btn btn-primary" onClick={handleSubmit}>Upload &amp; Next</button>
         </div>
-
-        <button type="submit" className="block mb2 btn btn-primary" onClick={handleSubmit}>Sign Up</button>
       </form>
     );
   }
@@ -74,7 +72,7 @@ export default class ApplyDocuments extends React.Component {
     console.log(this.submit);
     return (
       <div className="page container">
-        <h1>Sign Up</h1>
+        <h1>Document upload</h1>
         <DocumentsForm onSubmit={this.submit}/>
       </div>
     )
