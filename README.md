@@ -1,1 +1,1 @@
-# kairon-application-management-frontend
+# kiron-application-management-frontend
