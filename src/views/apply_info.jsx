@@ -99,7 +99,7 @@ const Form = reduxForm({
   validate
 })(_Form);
 
-export default class SignUp extends React.Component {
+export default class ApplyInfo extends React.Component {
 
   constructor (props) {
     super(props);
