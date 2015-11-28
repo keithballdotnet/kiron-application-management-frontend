@@ -29,19 +29,12 @@ function getAge(dateString) {
 const validate = function (values) {
   const errors = {};
 
-  formUtils.required(values, 'firstName', errors);
-  formUtils.required(values, 'lastName', errors);
-  formUtils.required(values, 'email', errors);
   formUtils.required(values, 'birthday', errors);
   formUtils.required(values, 'gender', errors);
   formUtils.required(values, 'city', errors);
   formUtils.required(values, 'country', errors);
   formUtils.required(values, 'zip', errors);
   formUtils.required(values, 'address', errors);
-
-  if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address.';
-  }
 
   if (values.birthday && !/[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i.test(values.birthday)) {
     errors.birthday = 'Invalid date.';
@@ -71,9 +64,6 @@ class _InfoForm extends React.Component {
 
   render () {
     const {fields: {
-      firstName,
-      lastName,
-      email,
       birthday,
       gender,
       nationality,
@@ -91,22 +81,16 @@ class _InfoForm extends React.Component {
     return (
       <form className="sm-col-6" onSubmit={handleSubmit}>
         <h2>Personal Information</h2>
-        <label>First Name {formUtils.errorSpan(firstName)}</label>
-        <input className={baseClass + (formUtils.hasError(firstName) ? ' is-error' : '')} type="text" placeholder="First Name" {...firstName}/>
-        <label>Last Name {formUtils.errorSpan(lastName)}</label>
-        <input className={baseClass + (formUtils.hasError(lastName) ? ' is-error' : '')} type="text" placeholder="Last Name" {...lastName}/>
-        <label>Email address {formUtils.errorSpan(email)}</label>
-        <input className={baseClass + (formUtils.hasError(email) ? ' is-error' : '')} type="email" placeholder="name@domain.com" {...email}/>
-        <label>Birthday{formUtils.errorSpan(birthday)}</label>
+        <label>Birthday{formUtils.ErrorSpan(birthday)}</label>
         <input className={baseClass + (formUtils.hasError(birthday) ? ' is-error' : '')} type="text" placeholder="YYYY-MM-DD" {...birthday}/>
         <label>Gender</label>
         <select required {...gender} className="block col-12 mb1 field">
           <option key={GENDER.MALE} value={GENDER.MALE}>{GENDER.MALE}</option>
           <option key={GENDER.FEMALE} value={GENDER.FEMALE}>{GENDER.FEMALE}</option>
         </select>
-        <label>Nationality{formUtils.errorSpan(nationality)}</label>
+        <label>Nationality{formUtils.ErrorSpan(nationality)}</label>
         <input className={baseClass + (formUtils.hasError(nationality) ? ' is-error' : '')} type="text" placeholder="Nationality" {...nationality}/>
-        <label>Phone{formUtils.errorSpan(phone)}</label>
+        <label>Phone{formUtils.ErrorSpan(phone)}</label>
         <input className={baseClass + (formUtils.hasError(phone) ? ' is-error' : '')} type="text" placeholder="01234567" {...phone}/>
         <label>Address</label>
         <br/>
@@ -118,17 +102,17 @@ class _InfoForm extends React.Component {
           })
            }
         </select>
-        <label>City{formUtils.errorSpan(city)}</label>
+        <label>City{formUtils.ErrorSpan(city)}</label>
         <input className={baseClass + (formUtils.hasError(city) ? ' is-error' : '')} type="text" placeholder="Munich" {...city}/>
-        <label>ZIP{formUtils.errorSpan(zip)}</label>
+        <label>ZIP{formUtils.ErrorSpan(zip)}</label>
         <input className={baseClass + (formUtils.hasError(zip) ? ' is-error' : '')} type="text" placeholder="ZIP" {...zip}/>
-        <label>Street{formUtils.errorSpan(address)}</label>
+        <label>Street{formUtils.ErrorSpan(address)}</label>
         <input className={baseClass + (formUtils.hasError(address) ? ' is-error' : '')} type="text" placeholder="55 Berlin St." {...address}/>
-        <label>Address extra{formUtils.errorSpan(zip)}</label>
+        <label>Address extra{formUtils.ErrorSpan(zip)}</label>
         <input className={baseClass + (formUtils.hasError(address_extra) ? ' is-error' : '')} type="text" placeholder="2nd floor" {...address_extra}/>
-        
+
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Next</button>
-      
+
       </form>
     );
   }
