@@ -4,11 +4,14 @@ import React from 'react';
 import {reduxForm} from 'redux-form';
 
 import { USER_TYPES } from '../constants';
+import { GENDER } from '../constants';
 import * as formUtils from '../utils/forms';
+
+//import { countriesJson } from '../constants/countries.json';
 
 const FIELDS = [
   'firstName', 'lastName', 'email',
-  'birthday', 
+  'birthday', 'gender','nationality','phone'
 ];
 
 function getAge(dateString) {
@@ -28,14 +31,19 @@ const validate = function (values) {
   formUtils.required(values, 'firstName', errors);
   formUtils.required(values, 'lastName', errors);
   formUtils.required(values, 'email', errors);
+  formUtils.required(values, 'birthday', errors);
+  formUtils.required(values, 'gender', errors);
 
   if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
     errors.email = 'Invalid email address.';
   }
 
-  if (values.birthday && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.birthday = 'Birthday.';
+  if (values.birthday && !/[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/i.test(values.birthday)) {
+    errors.birthday = 'Invalid date.';
+  }else if (getAge(values.birthday)<5 || getAge(values.birthday)>150 ) {
+    errors.birthday = 'You are too young or too old!';
   }
+
 
   formUtils.required(values, 'userType', errors);
   return errors;
@@ -55,7 +63,7 @@ class _Form extends React.Component {
 
   render () {
     const {fields: {
-      firstName, lastName, email, password, passwordConfirm, userType
+      firstName, lastName, email, birthday, gender,nationality,phone
     }, handleSubmit} = this.props;
 
     const baseClass = "block col-6 mb2 field";
@@ -77,14 +85,8 @@ class _Form extends React.Component {
           <option key={GENDER.MALE} value={GENDER.MALE}>{GENDER.MALE}</option>
           <option key={GENDER.FEMALE} value={GENDER.FEMALE}>{GENDER.FEMALE}</option>
         </select>
-        <label>Nationality</label>
-        <select required {...nationality} className="block col-12 mb1 field">
-          {
-            countriesJson.map(({name, code}) => {
-              return <option key={code} value={code}>{name}</option>;
-            })
-          }
-        </select>
+        <label>Nationality{formUtils.errorSpan(nationality)}</label>
+        <input className={baseClass + (formUtils.hasError(nationality) ? ' is-error' : '')} type="text" placeholder="Nationality" {...nationality}/>
         <label>Phone</label>
         <input required className="block col-12 mb1 field" type="tel" placeholder="XXXXXXXXXX" {...phone}/>
         <button type="submit" className="btn btn-primary" onClick={handleSubmit}>Next</button>
