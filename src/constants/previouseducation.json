@@ -1,0 +1,7 @@
+[
+{"name": "No school at all","id":1},
+{"name": "elementary / primary school (4-8 years of school)","id":2},
+{"name": "secondary / high school (8-13 years of school)","id":3},
+{"name": "Associate degree / certificate / junior college","id":4},
+{"name": "Bachelor or equivalent","id":5}
+]
