@@ -27,11 +27,8 @@ module.exports = {
       }, {
         test: /\.json?$/, loader: 'json-loader'
       }, {
-        test: /\.scss$/,
-        loader: ExtractTextWebpackPlugin.extract(
-          'css?sourceMap' +
-          '!autoprefixer-loader?browsers=last 2 versions' +
-          '!sass?sourceMap=true&sourceMapContents=true&outputStyle=compressed')
+        test: /\.css$/,
+        loader: ExtractTextWebpackPlugin.extract('css?sourceMap')
       }
     ],
   },

@@ -1,0 +1,18 @@
+@charset 'utf-8';
+
+html {
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 1rem;
+}
+
+body * {
+  font-family: 'Roboto', sans-serif, system;
+}
