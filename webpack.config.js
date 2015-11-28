@@ -36,7 +36,7 @@ module.exports = {
   plugins: [
     // new webpack.NoErrorsPlugin(),
     new ExtractTextWebpackPlugin('style-[hash].css', {
-        allChunks: true
+        allChunks: true,
     }),
     new HTMLWebpackPlugin({
       template: './src/index.html',
