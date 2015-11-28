@@ -92,7 +92,7 @@ class _InfoForm extends React.Component {
     console.log(handleSubmit);
 
     return (
-      <form className="sm-col-6" onSubmit={handleSubmit}>
+      <form className="sm-col-6 mb3" onSubmit={handleSubmit}>
         <h2>Personal Information</h2>
         <label>First Name {formUtils.errorSpan(firstName)}</label>
         <input className={baseClass + (formUtils.hasError(firstName) ? ' is-error' : '')} type="text" placeholder="First Name" {...firstName}/>
