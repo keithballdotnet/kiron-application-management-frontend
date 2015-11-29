@@ -7,7 +7,7 @@ import { USER_ROLE } from './constants';
 let _authToken = undefined;
 
 function _storeToken () {
-  localStorage.setItem('KIRON_AUTH_TOKEN', _authToken);
+  localStorage.setItem('KIRON_AUTH_TOKEN', JSON.stringify(_authToken));
 }
 
 function _loadToken () {
@@ -20,7 +20,7 @@ function _loadToken () {
   if (!storedToken) {
     return _authToken = null;
   } else{
-    let {token, expiry} = storedToken;
+    let {token, expiry} = JSON.parse(storedToken);
     if (expiry > Date.now()) {
       return _authToken = {token, expiry};
     } else {

@@ -9,6 +9,7 @@ import actions from '../actions';
 import ApplicationIntroText from './apply_intro_text';
 import ApplicationInfoForm from '../forms/application_info';
 import ApplicationEducationForm from '../forms/application_education';
+import ApplicationDocumentForm from '../forms/application_document';
 
 const STAGES = [
   'Introduction',
@@ -84,7 +85,7 @@ export class ApplicationInfo extends ApplyStageWrapper {
 
   render () {
     return (
-      <div className="page container">
+      <div className="container">
         <h2>Personal Information</h2>
         <ApplicationInfoForm onSubmit={this.next}/>
       </div>
@@ -98,7 +99,7 @@ export class ApplicationEducation extends ApplyStageWrapper {
 
   render () {
     return (
-      <div className="page container">
+      <div className="container">
         <h2>Your education</h2>
         <ApplicationEducationForm onSubmit={this.next}/>
       </div>
@@ -107,6 +108,71 @@ export class ApplicationEducation extends ApplyStageWrapper {
 }
 
 ApplicationEducation = connect(state => state)(ApplicationEducation);
+
+export class ApplicationDocument extends ApplyStageWrapper {
+
+  render () {
+    return (
+      <div className="container">
+        <h2>Proof of refuger status</h2>
+        <ApplicationDocumentForm onSubmit={this.next}/>
+      </div>
+    )
+  }
+}
+
+ApplicationDocument = connect(state => state)(ApplicationDocument);
+
+function completed(arr) {
+  return (
+    arr.includes(1) && arr.includes(2) && arr.includes(3)
+  );
+}
+
+export class ApplicationConfirm extends ApplyStageWrapper {
+
+  constructor (props) {
+    super(props);
+  }
+
+  render () {
+
+    if (!completed(this.props.application.completed)) {
+      return (
+        <div className="md-col-12 border-box mb2 mt2">
+          <div className="overflow-hidden border-box m1 bg-white border rounded">
+            <div className="p1 bg-silver black">
+              <h1 className="h3 m0">Incomplete application</h1>
+            </div>
+            <div className="p2">
+              <p className="m0">
+                You cannot submit you application before filling all the required data.
+                <br/>
+                Please have a look at previous steps.
+              </p>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <div className="container">
+        <h2>Confirm your data</h2>
+        <h3>Personal Information</h3>
+        <pre>
+          {JSON.stringify(this.props.application.data[1])}
+        </pre>
+        <h3>Education</h3>
+        <pre>
+          {JSON.stringify(this.props.application.data[2])}
+        </pre>
+      </div>
+    );
+  }
+}
+
+ApplicationConfirm = connect(state => state)(ApplicationConfirm);
 
 class Apply extends React.Component {
   constructor (props) {
@@ -124,7 +190,7 @@ class Apply extends React.Component {
 
   render () {
     return (
-      <div className="page container">
+      <div className="container">
         <h1>Application Process</h1>
         <ApplyStages
           stage={this.props.application.stage}

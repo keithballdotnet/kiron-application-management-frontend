@@ -25,7 +25,7 @@ const initialState = {
       previousEducation: null
     },
     3: {
-      documents: []
+      doc: null
     }
   }
 }

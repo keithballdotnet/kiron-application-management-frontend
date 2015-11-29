@@ -17,7 +17,8 @@ import guard from './guard';
 import SignUp from './signup';
 import Login from './login';
 import {
-  ApplyPage, ApplicationIntro, ApplicationInfo, ApplicationEducation
+  ApplyPage, ApplicationIntro, ApplicationInfo, ApplicationEducation,
+  ApplicationDocument, ApplicationConfirm
 } from './apply';
 import Landing from './landing';
 
@@ -48,6 +49,8 @@ export const routes = (
       <Route path='/apply/0' component={ApplicationIntro}/>
       <Route path='/apply/1' component={ApplicationInfo}/>
       <Route path='/apply/2' component={ApplicationEducation}/>
+      <Route path='/apply/3' component={ApplicationDocument}/>
+      <Route path='/apply/4' component={ApplicationConfirm}/>
     </Route>
     <Route path="*" component={_404}/>
   </Route>

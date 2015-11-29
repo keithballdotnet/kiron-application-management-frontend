@@ -13,7 +13,7 @@ import {routes} from './views/root';
 const create = compose(
   applyMiddleware(thunkMiddleware, createLogger()),
   reduxReactRouter({routes, history: createHashHistory()}),
-  persistState('auth', {key: 'KIRON_STORE_AUTH'})
+  persistState(['auth', 'application'], {key: 'KIRON_STORE_AUTH'})
 )(createStore);
 
 export default create(reducer);
