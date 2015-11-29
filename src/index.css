@@ -29,7 +29,9 @@ a:hover{
 .page {
   padding: 1em;
 }
-
+.whole{
+  min-height: 100vh;
+}
 header {
   min-height: 116px;
 }
