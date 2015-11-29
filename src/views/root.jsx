@@ -30,7 +30,7 @@ class AppHandler extends React.Component {
   }
 
   render = () => (
-    <div>
+    <div className="flex flex-column">
       <Header/>
       <FlashMessageList/>
       {this.props.children}
