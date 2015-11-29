@@ -17,15 +17,9 @@ body * {
   font-family: 'Roboto', sans-serif, system;
 }
 
-.btn-primary{
-	background-color: #35649C;
-	text-transform: uppercase;
-	    border-radius: 0px;
-
-}
-
-.btn-primary:hover{
-	border-color: black;
+.btn {
+  font-weight: 400;
+  font-family: 'Roboto Condensed', Roboto, sans-serif, system;
 }
 
 a:hover{

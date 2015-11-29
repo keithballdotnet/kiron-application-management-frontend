@@ -20,7 +20,7 @@ const STAGES = [
 
 function ApplyStages (props) {
   const {stage, completed} = props;
-  const baseCls = "left btn btn-primary p1 flex-auto m1";
+  const baseCls = "left btn btn-primary bg-blue p1 flex-auto m1";
   return (
     <div className="flex center">
       {STAGES.map((stageName, index) => {
