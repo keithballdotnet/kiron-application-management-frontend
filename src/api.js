@@ -29,6 +29,11 @@ function _loadToken () {
   }
 }
 
+function _setToken (token, expiry) {
+  _authToken = {token, expiry};
+  _storeToken();
+}
+
 export function init () {
   _loadToken();
 }
@@ -43,12 +48,17 @@ export function signUp ({firstName, lastName, email, password, userType}) {
         ...res,
         firstName, lastName, email, password,
         role: USER_ROLE.APPLICANT
-      }
+      },
+      token: 'FAKEASSTOKEN',
+      token_expiry: Date.now() + 1000 * 60 * 60,
     };
+  }).then(res => {
+    _setToken(res.token, res.token_expiry);
+    return res.result;
   });
 }
 
-export function login ({email, password}) {
+export function login (email, password) {
   if (email === 'c.lirsac@gmail.com' && password === '123456') {
     return Promise.resolve({
       result: {
@@ -56,6 +66,9 @@ export function login ({email, password}) {
       },
       token: 'FAKEASSTOKEN',
       token_expiry: Date.now() + 1000 * 60 * 60,
+    }).then(res => {
+      _setToken(res.token, res.token_expiry);
+      return res.result;
     });
   } else {
     return Promise.reject({error: 'Server Error', errorCode: 500});

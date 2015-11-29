@@ -2,31 +2,34 @@
 
 import {createReducer} from './index';
 import {
-  AUTH_LOGIN_FAILED, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_REQUEST, AUTH_LOGOUT
+  AUTH_LOGIN_FAILURE, AUTH_LOGIN_SUCCESS, AUTH_LOGIN_REQUEST, AUTH_LOGOUT
 } from '../constants/actions';
 
 const initialState = {
   email: null,
   id: null,
   isLoggedIn: false,
-  role: false
+  role: false,
+  inFlight: false
 }
 
 export default createReducer(initialState, {
   [AUTH_LOGIN_REQUEST]: function (state, payload) {
-    console.log("AHAH", payload);
-    return state;
+    return {...state, inFlight: true};
   },
 
   [AUTH_LOGIN_SUCCESS]: function (state, payload) {
-    return state;
+    const {email, id, role} = payload;
+    return {
+      ...state, id, email, role, inFlight: false, isLoggedIn: true
+    };
   },
 
-  [AUTH_LOGIN_FAILED]: function (state, payload) {
-    return state;
+  [AUTH_LOGIN_FAILURE]: function (state, payload) {
+    return initialState;
   },
 
   [AUTH_LOGOUT]: function (state, payload) {
-    return state;
+    return initialState;
   }
 });

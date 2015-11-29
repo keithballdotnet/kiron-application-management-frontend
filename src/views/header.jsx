@@ -2,11 +2,51 @@
 
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {pushState} from 'redux-router';
 
-export default class Header extends React.Component {
+import { USER_ROLE } from '../constants';
+import actions from '../actions';
+
+function HeaderLink (props) {
+  const {roles, auth, to, text, hideWhenLoggedIn, showWhenLoggedIn, click} = props;
+  if (
+    roles && !roles.includes(auth.role) ||
+    hideWhenLoggedIn && auth.isLoggedIn ||
+    showWhenLoggedIn && !auth.isLoggedIn
+  ) {
+    return <span></span>;
+  }
+  if (to) {
+    return (
+      <Link to={to} className='btn-primary p2 ml1 mr1 bg-white bg-darken-1 header__button'>
+        {text}
+      </Link>
+    );
+  } else if (click) {
+    const _click = (evt) => {
+      evt.preventDefault();
+      evt.stopPropagation();
+      click();
+    }
+    return (
+      <a href="#" onClick={_click}
+         className='btn-primary p2 ml1 mr1 bg-white bg-darken-1 header__button'>
+        {text}
+      </a>
+    );
+  }
+}
+
+class Header extends React.Component {
   constructor (props) {
     super(props);
   }
+
+  logout = () => {
+    this.props.dispatch(actions.authLogout())
+    this.props.dispatch(pushState(null, `/`));
+  };
 
   render () {
     return (
@@ -18,21 +58,19 @@ export default class Header extends React.Component {
             </Link>
           </div>
           <div className="sm-col-right align-middle head-col-right border-box header__right">
-            <Link to="/signup"
-                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
-              Sign Up
-            </Link>
-            <Link to="/login"
-                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
-              Login
-            </Link>
-            <Link to="/apply"
-                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
-              Apply
-            </Link>
+            <HeaderLink to='/login' text='Login'
+                        hideWhenLoggedIn auth={this.props.auth}/>
+            <HeaderLink to='/signup' text='Sign Up'
+                        hideWhenLoggedIn auth={this.props.auth}/>
+            <HeaderLink to='/apply' text='Apply'
+                        roles={[USER_ROLE.APPLICANT]} auth={this.props.auth}/>
+            <HeaderLink click={this.logout} text='Logout'
+                        showWhenLoggedIn auth={this.props.auth}/>
           </div>
         </nav>
       </header>
     );
   }
 }
+
+export default connect(state => state)(Header);

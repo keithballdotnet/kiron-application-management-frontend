@@ -35,5 +35,5 @@ class _LoginForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'synchronousValidation', fields: FIELDS, validate
+  form: 'synchronousValidation', fields: FIELDS, validate, touchOnBlur: false
 })(_LoginForm);

@@ -1,10 +1,8 @@
 'use strict';
 
-import { bindActionCreators } from 'redux';
 import _ from 'lodash';
 
-import store from './store';
-import * as types from './constants/actions';
+import * as actionTypes from '../constants/actions';
 
 function makeAction (type) {
   return (payload) => {
@@ -12,7 +10,7 @@ function makeAction (type) {
   };
 }
 
-export default Object.keys(types).reduce((actions, type) => {
+export default Object.keys(actionTypes).reduce((actions, type) => {
   return {
     ...actions,
     [_.camelCase(type)]: makeAction(type)

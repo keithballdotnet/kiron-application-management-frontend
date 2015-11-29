@@ -36,6 +36,7 @@ header {
 }
 
 .header__button {
+  font-family: 'Roboto Condensed', Roboto, sans-serif, system;
 	color:gray;
 	vertical-align: middle;
 	background-color: white;

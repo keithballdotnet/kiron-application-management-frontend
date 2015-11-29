@@ -3,9 +3,15 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { ReduxRouter } from 'redux-router';
-import { Provider } from 'react-redux';
+import { Provider, connect } from 'react-redux';
+
+import { USER_ROLE } from '../constants';
 
 import Header from './header';
+import FlashMessageList from './flash';
+
+import guard from './guard';
+
 import SignUp from './signup';
 import Login from './login';
 import Apply from './apply';
@@ -20,7 +26,13 @@ class AppHandler extends React.Component {
     super(props);
   }
 
-  render = () => <div><Header/>{this.props.children}</div>;
+  render = () => (
+    <div>
+      <Header/>
+      <FlashMessageList/>
+      {this.props.children}
+    </div>
+  );
 }
 
 export const routes = (
@@ -28,9 +40,10 @@ export const routes = (
     <Route path='/' component={Index}/>
     <Route path='/signup' component={SignUp}/>
     <Route path='/login' component={Login}/>
-    <Route path='/apply/info' component={ApplyInfo}/>
-    <Route path='/apply/education' component={ApplyEducation}/>
-    <Route path='/apply' component={Apply}/>
+    <Route path='/apply' component={guard(Apply, [USER_ROLE.APPLICANT])}>
+      <Route path='/apply/info' component={ApplyInfo}/>
+      <Route path='/apply/education' component={ApplyEducation}/>
+    </Route>
     <Route path="*" component={_404}/>
   </Route>
 );
@@ -43,7 +56,7 @@ export default class Root extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-          <ReduxRouter>{routes}</ReduxRouter>
+        <ReduxRouter>{routes}</ReduxRouter>
       </Provider>
     );
   }

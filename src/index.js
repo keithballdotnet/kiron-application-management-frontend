@@ -4,6 +4,7 @@ import * as _Q from 'es6-promise';
 import fetch from 'whatwg-fetch';
 import ReactDOM from 'react-dom';
 import React from 'react';
+import { devTools, persistState } from 'redux-devtools';
 
 _Q.polyfill();
 

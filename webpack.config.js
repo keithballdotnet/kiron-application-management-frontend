@@ -3,6 +3,7 @@ var webpack = require('webpack');
 
 var HTMLWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   devtool: 'sourcemap',
@@ -41,6 +42,10 @@ module.exports = {
     new HTMLWebpackPlugin({
       template: './src/index.html',
       inject: 'body' // Inject all scripts into the body
-    })
+    }),
+    new WebpackNotifierPlugin({
+      alwaysNotify: true,
+      title: 'Kiron | AM'
+    }),
   ],
 }

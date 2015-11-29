@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import {pushState} from 'redux-router';
 
 import actions from '../actions';
 import LoginForm from '../forms/login';
@@ -10,11 +11,23 @@ class Login extends React.Component {
 
   constructor (props) {
     super(props);
-    this.dispatch = this.props.dispatch;
+  }
+
+  componentWillMount () {
+    if (this.props.auth.isLoggedIn) {
+      this.props.dispatch(pushState(null, `/`));
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.auth.isLoggedIn) {
+      this.props.dispatch(pushState(null, `/`));
+    }
   }
 
   submit  = ({email, password}) => {
-    this.dispatch(actions.authLoginRequest({email, password}));
+    const next = this.props.location.query.next || '/';
+    this.props.dispatch(actions.authLoginRequest(email, password, next));
   }
 
   render () {
