@@ -20,9 +20,11 @@ body * {
 .btn-primary{
 	background-color: #35649C;
 	text-transform: uppercase;
+	    border-radius: 0px;
+
 }
 
-.btn-primary{
+.btn-primary:hover{
 	border-color: black;
 }
 
