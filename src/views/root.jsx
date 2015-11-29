@@ -8,6 +8,8 @@ import { Provider, connect } from 'react-redux';
 import { USER_ROLE } from '../constants';
 
 import Header from './header';
+
+import Footer from './footer';
 import FlashMessageList from './flash';
 
 import guard from './guard';
@@ -32,6 +34,7 @@ class AppHandler extends React.Component {
       <Header/>
       <FlashMessageList/>
       {this.props.children}
+      <Footer/>
     </div>
   );
 }

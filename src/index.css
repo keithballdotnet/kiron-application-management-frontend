@@ -34,6 +34,16 @@ header {
   min-height: 116px;
 }
 
+footer{
+	background-color: #004a75;
+	color: white;
+    font-size: 14px;
+    padding-bottom: 40px;
+    padding-top: 30px;
+    text-align: left;
+    min-height: 10px;
+}
+
 .header__logo {
   line-height: 100px;
   /*padding: 35px;
@@ -65,3 +75,5 @@ header {
 	background-repeat: no-repeat;
 	height: 80vh;
 }
+
+
