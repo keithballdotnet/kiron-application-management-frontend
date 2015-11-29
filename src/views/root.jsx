@@ -30,10 +30,12 @@ class AppHandler extends React.Component {
   }
 
   render = () => (
-    <div className="flex flex-column">
+    <div className="flex flex-column whole">
       <Header/>
+        <main className="flex-auto">
       <FlashMessageList/>
       {this.props.children}
+        </main>
       <Footer/>
     </div>
   );
