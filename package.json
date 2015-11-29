@@ -27,7 +27,7 @@
     "extract-text-webpack-plugin": "^0.9.1",
     "html-webpack-plugin": "^1.7.0",
     "json-loader": "^0.5.4",
-    "redux-devtools": "^2.1.5",
+    "redux-devtools": "^3.0.0-beta-3",
     "redux-devtools-dock-monitor": "^1.0.0-beta-3",
     "redux-devtools-log-monitor": "^1.0.0-beta-3",
     "webpack": "^1.12.9",
@@ -36,13 +36,16 @@
   "dependencies": {
     "es6-promise": "^3.0.2",
     "history": "^1.13.1",
+    "lodash": "^3.10.1",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "redux": "^3.0.4",
     "redux-form": "^3.0.12",
+    "redux-logger": "^2.0.4",
     "redux-router": "^1.0.0-beta4",
+    "redux-thunk": "^1.0.0",
     "whatwg-fetch": "^0.10.1"
   }
 }

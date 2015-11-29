@@ -7,11 +7,13 @@ import React from 'react';
 
 _Q.polyfill();
 
-import App from './views/app.jsx';
+import Root from './views/root';
+import * as api from './api';
+import store from './store';
 
 function start () {
-  ReactDOM.render(<App/>, document.getElementById('App')
-  );
+  api.init();
+  ReactDOM.render(<Root store={store}/>, document.getElementById('App'));
 }
 
 if (document.readyState === "complete" || document.readyState === "loaded") {

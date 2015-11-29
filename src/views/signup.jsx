@@ -3,9 +3,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ApplicationInfoForm from '../forms/application_info';
+import SignUpForm from '../forms/signup';
 
-class ApplicationInfo extends React.Component {
+class SignUp extends React.Component {
 
   constructor (props) {
     super(props);
@@ -18,11 +18,11 @@ class ApplicationInfo extends React.Component {
   render () {
     return (
       <div className="page container">
-        <h2>Personal Information</h2>
-        <ApplicationInfoForm onSubmit={this.submit}/>
+        <h1>Sign Up</h1>
+        <SignUpForm onSubmit={this.submit}/>
       </div>
     )
   }
 }
 
-export default connect(state => state)(ApplicationInfo);
+export default connect(state => state)(SignUp);
