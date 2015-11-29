@@ -35,9 +35,9 @@ header {
 }
 
 .header__logo {
-  height: 116px;
-  padding: 35px;
-  margin-left: -17px;
+  line-height: 100px;
+  /*padding: 35px;
+  /*margin-left: -17px;*/
 }
 
 .header__button {
@@ -63,4 +63,5 @@ header {
 	background: url('https://kiron.university/img/bg1.jpg');
 	background-size: 100%;
 	background-repeat: no-repeat;
+	height: 80vh;
 }
