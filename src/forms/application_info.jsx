@@ -40,8 +40,6 @@ class _ApplicationInfoForm extends React.Component {
     }, handleSubmit} = this.props;
     const _cls = "block col-12 mb2";
 
-    console.log(this.props.initialValues);
-
     return (
       <form className="sm-col-12" onSubmit={handleSubmit}>
         <Input
@@ -79,5 +77,5 @@ class _ApplicationInfoForm extends React.Component {
 export default reduxForm({
   form: 'applicationInfo', fields: FIELDS, validate, touchOnBlur: false
 }, state => ({
-  initialValues: state.application.completed.includes[1] ? state.application.data[1] : {}
+  initialValues: state.application.completed.includes(1) ? state.application.data[1] : {}
 }))(_ApplicationInfoForm);

@@ -25,8 +25,8 @@ function ApplyStages (props) {
     <div className="flex center">
       {STAGES.map((stageName, index) => {
         let cls = baseCls;
-        cls = completed.includes(index) ? cls + ' bg-green' : cls;
         cls = index === stage ? cls + ' bg-teal' : cls;
+        cls = completed.includes(index) ? cls + ' bg-green' : cls;
         return (
           <Link to={`/apply/${index}`} key={index} className={cls}>
             {`(${index + 1}) ${stageName}`}
@@ -55,8 +55,9 @@ export class ApplyStageWrapper extends React.Component {
 
   next = (data) => {
     const stage = this.props.application.stage;
+    console.log(data);
     this.props.dispatch(
-      actions.applicationAdvance({stage}));
+      actions.applicationAdvance({stage, data}));
     this.props.dispatch(pushState(null, `/apply/${stage + 1}`));
   }
 

@@ -11,15 +11,16 @@ import previousEducationJSON from '../constants/previous_education.json'
 
 const studyProgramOptions = studyProgramJSON.map(({name, id}) => [id, name]);
 const previousEducationOptions = previousEducationJSON.map(
-  ({name, id}) => [id, name]
-);
+  ({name, id}) => [id, name]);
 
 const FIELDS = ['studyProgram', 'previousEducation'];
 
 const validate = validator({previousEducation: 'required'});
 
 class _ApplicationEducationForm extends React.Component {
+
   render () {
+
     const {
       fields: {studyProgram, previousEducation}, handleSubmit
     } = this.props;
@@ -45,5 +46,7 @@ class _ApplicationEducationForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'applicationEducation', fields: FIELDS, validate, touchOnBlur: false
-})(_ApplicationEducationForm);
+  form: 'applicationEducation', fields: FIELDS, validate, touchOnBlur: false,
+}, (state) => ({
+    initialValues: state.application.completed.includes(2) ? state.application.data[2] : {}
+}))(_ApplicationEducationForm);
