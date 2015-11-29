@@ -28,6 +28,11 @@ a:hover{
 header {
 	min-height: 116px;
 }
+.btn-primary{
+	background-color: #35649c;
+	border-radius: 0;
+
+}
 
 .header__logo {
 	height: 116px;
