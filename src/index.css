@@ -17,6 +17,38 @@ body * {
   font-family: 'Roboto', sans-serif, system;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 .page {
   padding: 1em;
+}
+
+header {
+	min-height: 116px;
+}
+
+.header__logo {
+	height: 116px;
+	padding: 35px;
+	margin-left: -17px;
+}
+
+.header__button {
+	color:gray;
+	vertical-align: middle;
+	background-color: white;
+	line-height: 100px;
+  text-transform: uppercase;
+	text-decoration: none;
+}
+
+.header__button:hover {
+	background-color: light-gray;
+	color: black;
+}
+
+.header__right {
+	line-height: 25px;
 }

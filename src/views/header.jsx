@@ -10,16 +10,29 @@ export default class Header extends React.Component {
 
   render () {
     return (
-      <nav className="clearfix white bg-black">
-        <div className="sm-col">
-          <Link to="/" className="btn py2">Kiron Application Management</Link>
-        </div>
-        <div className="sm-col-right">
-          <Link to="/signup" className="btn py2">Sign Up</Link>
-          <Link to="/login" className="btn py2">Login</Link>
-          <Link to="/apply/info" className="btn py2">Apply</Link>
-        </div>
-      </nav>
+      <header>
+        <nav className="clearfix bg-white gray border-bottom">
+          <div className="ml3 mr3">
+            <Link to="/" className="sm-col header__logo">
+              <img width="80" src="http://kiron.university/img/logo.png"/>
+            </Link>
+          </div>
+          <div className="sm-col-right align-middle head-col-right border-box header__right">
+            <Link to="/signup"
+                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
+              Sign Up
+            </Link>
+            <Link to="/login"
+                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
+              Login
+            </Link>
+            <Link to="/apply"
+                  className="btn-primary py3 px1 ml1 mr1 bg-white bg-darken-1 header__button">
+              Apply
+            </Link>
+          </div>
+        </nav>
+      </header>
     );
   }
 }
