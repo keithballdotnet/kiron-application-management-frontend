@@ -42,15 +42,22 @@ export function Radio (props) {
 }
 
 export function Select (props) {
-  const {field, cls, label, options} = props;
+  const {field, cls, label, options, nullable} = props;
+
+  const _options = options.map(([key, display]) => {
+    display = display || key;
+    return <option key={key} value={key}>{display}</option>;
+  });
+
+  if (nullable) {
+    _options.unshift(<option key='null_option' value=''></option>);
+  }
+
   return (
     <div>
       <label>{label || ''} <ErrorSpan field={field}/></label>
       <select {...field} className={'field ' + cls}>
-      {options.map(([key, display]) => {
-        display = display || key;
-        return <option key={key} value={key}>{display}</option>;
-      })}
+      {_options}
       </select>
     </div>
   );

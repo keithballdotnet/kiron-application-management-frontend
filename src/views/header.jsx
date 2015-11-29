@@ -17,7 +17,7 @@ export default class Header extends React.Component {
         <div className="sm-col-right">
           <Link to="/signup" className="btn py2">Sign Up</Link>
           <Link to="/login" className="btn py2">Login</Link>
-          <Link to="/apply_info" className="btn py2">Apply</Link>
+          <Link to="/apply/info" className="btn py2">Apply</Link>
         </div>
       </nav>
     );
