@@ -22,7 +22,7 @@ class Landing extends React.Component {
                   <strong>&nbsp;Kiron</strong>
               </div>
               <div className="right sm-col-right white">
-                <a className="white" href="http://kiron.univiersity/contact-us">Contact & Imprint</a>
+                <a className="white" href="http://kiron.university/contact-us">Contact & Imprint</a>
               </div>
            </div>
          </footer>
