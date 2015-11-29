@@ -64,3 +64,9 @@ header {
 .header__right {
 	line-height: 25px;
 }
+
+.landing{
+	background: url('https://kiron.university/img/bg1.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
+}

@@ -17,8 +17,9 @@ import Login from './login';
 import Apply from './apply';
 import ApplyInfo from './apply_info';
 import ApplyEducation from './apply_education';
+import Landing from './landing';
 
-const Index = () => <div className='page container'><h1>Index</h1></div>;
+//const Index = () => <div className='page container'><h1>Index</h1></div>;
 const _404 = () => <div className='page container'><h1>404</h1></div>;
 
 class AppHandler extends React.Component {
@@ -37,7 +38,7 @@ class AppHandler extends React.Component {
 
 export const routes = (
   <Route component={AppHandler}>
-    <Route path='/' component={Index}/>
+    <Route path='/' component={Landing}/>
     <Route path='/signup' component={SignUp}/>
     <Route path='/login' component={Login}/>
     <Route path='/apply' component={guard(Apply, [USER_ROLE.APPLICANT])}>
