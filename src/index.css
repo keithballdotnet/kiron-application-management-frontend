@@ -17,6 +17,15 @@ body * {
   font-family: 'Roboto', sans-serif, system;
 }
 
+.btn-primary{
+	background-color: #35649C;
+	text-transform: uppercase;
+}
+
+.btn-primary{
+	border-color: black;
+}
+
 a:hover{
   text-decoration: none;
 }
