@@ -17,6 +17,17 @@ body * {
   font-family: 'Roboto', sans-serif, system;
 }
 
+.btn-primary{
+	background-color: #35649C;
+	text-transform: uppercase;
+	    border-radius: 0px;
+
+}
+
+.btn-primary:hover{
+	border-color: black;
+}
+
 a:hover{
   text-decoration: none;
 }
@@ -52,4 +63,10 @@ header {
 
 .header__right {
   line-height: 25px;
+}
+
+.landing{
+	background: url('https://kiron.university/img/bg1.jpg');
+	background-size: 100%;
+	background-repeat: no-repeat;
 }
