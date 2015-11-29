@@ -31,3 +31,7 @@ if (!Array.prototype.includes) {
     return false;
   };
 }
+
+require('pdfjs-dist/build/pdf');
+require('pdfjs-dist/web/pdf_viewer');
+PDFJS.workerSrc = require('pdfjs-dist/build/pdf.worker.js');

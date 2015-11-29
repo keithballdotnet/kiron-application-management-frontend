@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 import {pushState} from 'redux-router';
 
 import actions from '../actions';
+import Viewer from './document_viewer';
 import ApplicationIntroText from './apply_intro_text';
 import ApplicationInfoForm from '../forms/application_info';
 import ApplicationEducationForm from '../forms/application_education';
@@ -56,7 +57,6 @@ export class ApplyStageWrapper extends React.Component {
 
   next = (data) => {
     const stage = this.props.application.stage;
-    console.log(data);
     this.props.dispatch(
       actions.applicationAdvance({stage, data}));
     this.props.dispatch(pushState(null, `/apply/${stage + 1}`));
@@ -137,11 +137,12 @@ export class ApplicationConfirm extends ApplyStageWrapper {
 
   render () {
 
+    let warning = <span></span>;
     if (!completed(this.props.application.completed)) {
-      return (
+      warning = (
         <div className="md-col-12 border-box mb2 mt2">
           <div className="overflow-hidden border-box m1 bg-white border rounded">
-            <div className="p1 bg-silver black">
+            <div className="p1 bg-red white">
               <h1 className="h3 m0">Incomplete application</h1>
             </div>
             <div className="p2">
@@ -156,17 +157,44 @@ export class ApplicationConfirm extends ApplyStageWrapper {
       )
     }
 
-    return (
-      <div className="container">
-        <h2>Confirm your data</h2>
+    let items = [];
+
+    if (this.props.application.completed.includes(1)) {
+      items.push(
+        <div key='1'>
         <h3>Personal Information</h3>
         <pre>
           {JSON.stringify(this.props.application.data[1])}
         </pre>
+        </div>
+      )
+    }
+
+    if (this.props.application.completed.includes(2)) {
+      items.push(
+        <div key='2'>
         <h3>Education</h3>
         <pre>
           {JSON.stringify(this.props.application.data[2])}
         </pre>
+        </div>
+      )
+    }
+
+    if (this.props.application.completed.includes(3)) {
+      items.push(
+        <div key='3'>
+        <h3>Attestation document</h3>
+        <Viewer file={this.props.application.data[3].doc}/>
+        </div>
+      )
+    }
+
+    return (
+      <div className="container">
+        <h2>Confirm your data</h2>
+        {warning}
+        {items}
       </div>
     );
   }

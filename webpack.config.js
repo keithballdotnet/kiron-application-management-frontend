@@ -30,6 +30,9 @@ module.exports = {
       }, {
         test: /\.css$/,
         loader: ExtractTextWebpackPlugin.extract('css?sourceMap')
+      }, {
+        test: /\.pdf$|pdf\.worker\.js$/,
+        loader: "url-loader?limit=10000"
       }
     ],
   },
