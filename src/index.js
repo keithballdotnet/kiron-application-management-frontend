@@ -1,12 +1,9 @@
 require('./index.css'); // Import styles for webpack
 
-import * as _Q from 'es6-promise';
-import fetch from 'whatwg-fetch';
+import './polyfills';
+
 import ReactDOM from 'react-dom';
 import React from 'react';
-import { devTools, persistState } from 'redux-devtools';
-
-_Q.polyfill();
 
 import Root from './views/root';
 import * as api from './api';
