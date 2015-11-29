@@ -14,9 +14,10 @@ import guard from './guard';
 
 import SignUp from './signup';
 import Login from './login';
-import Apply from './apply';
-import ApplyInfo from './apply_info';
-import ApplyEducation from './apply_education';
+import {
+  ApplyPage, ApplicationIntro, ApplicationInfo, ApplicationEducation
+} from './apply';
+
 
 const Index = () => <div className='page container'><h1>Index</h1></div>;
 const _404 = () => <div className='page container'><h1>404</h1></div>;
@@ -40,9 +41,10 @@ export const routes = (
     <Route path='/' component={Index}/>
     <Route path='/signup' component={SignUp}/>
     <Route path='/login' component={Login}/>
-    <Route path='/apply' component={guard(Apply, [USER_ROLE.APPLICANT])}>
-      <Route path='/apply/info' component={ApplyInfo}/>
-      <Route path='/apply/education' component={ApplyEducation}/>
+    <Route path='/apply' component={guard(ApplyPage, [USER_ROLE.APPLICANT])}>
+      <Route path='/apply/0' component={ApplicationIntro}/>
+      <Route path='/apply/1' component={ApplicationInfo}/>
+      <Route path='/apply/2' component={ApplicationEducation}/>
     </Route>
     <Route path="*" component={_404}/>
   </Route>

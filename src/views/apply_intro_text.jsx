@@ -1,12 +1,13 @@
 'use strict';
 
 import React from 'react';
+import {Link} from 'react-router';
 
 export default function () {
   return (
     <div>
+      <h2>Welcome to the Kiron application process!</h2>
       <p>
-        Welcome to the Kiron application process!<br/>
         Kiron is a free higher education institution. We want to provide higher education to as many people as possible, however, we are especially targeting refugees and asylum seekers - traditionally groups that have a more difficult access to higher education.
 
         To sign up to our courses, you will need to send one of the following documents:

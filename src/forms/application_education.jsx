@@ -45,5 +45,5 @@ class _ApplicationEducationForm extends React.Component {
 }
 
 export default reduxForm({
-  form: 'synchronousValidation', fields: FIELDS, validate, touchOnBlur: false
+  form: 'applicationEducation', fields: FIELDS, validate, touchOnBlur: false
 })(_ApplicationEducationForm);
