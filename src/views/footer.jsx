@@ -15,14 +15,14 @@ class Landing extends React.Component {
 
   render () {
     return (
-         <footer>
+         <footer className="p2">
            <div className="container">
               <div className="sm-col">
                   © 2015
-                  <strong>Kiron</strong>
+                  <strong>&nbsp;Kiron</strong>
               </div>
               <div className="right sm-col-right white">
-                <a className="white" href="http://kiron.univiersity/contact-us">Contact & Imprint</a>
+                <a className="white" href="http://kiron.university/contact-us">Contact & Imprint</a>
               </div>
            </div>
          </footer>
